@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "584562469392",
+    "project_id": "attendance-recordingmonitoring",
+    "storage_bucket": "attendance-recordingmonitoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584562469392:android:ca00a06e29e6ff1d4ff895",
+        "android_client_info": {
+          "package_name": "com.example.pbl_arm_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584562469392-scbkiohubr3u3g696ihfuqf8rf1tdjbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDg6U5gx5rry5AVxuPhmluq21WoKn4P8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584562469392-scbkiohubr3u3g696ihfuqf8rf1tdjbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
