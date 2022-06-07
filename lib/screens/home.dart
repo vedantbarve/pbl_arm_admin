@@ -19,7 +19,8 @@ class _HomeViewState extends State<HomeView> {
   final _dateAndTime = TextEditingController();
   final _subject = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
+  int divisionDropDownValue = 1;
+  int batchDropDownValue = 1;
   @override
   void initState() {
     super.initState();
@@ -181,6 +182,71 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 8.0,
+                            left: 8.0,
+                          ),
+                          child: Text(
+                            'Division',
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        DropdownButton<int>(
+                          value: divisionDropDownValue,
+                          items: <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text("FE $value"),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() => divisionDropDownValue = value!);
+                          },
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 8.0,
+                            left: 8.0,
+                          ),
+                          child: Text(
+                            'Batch',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        DropdownButton<int>(
+                          value: batchDropDownValue,
+                          items: <int>[1, 2, 3]
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text("$value"),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() => batchDropDownValue = value!);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 Center(
                   child: ElevatedButton(

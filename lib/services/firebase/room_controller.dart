@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 import '../../models/room_model.dart';
 import '../../models/student_model.dart';
 
@@ -83,5 +84,24 @@ class RoomController {
       debugPrint(err.toString());
     }
     return null;
+  }
+
+  Future captureAttendance(
+    RoomModel roomData,
+    List<StudentModel> students,
+  ) async {
+    final firestore = FirebaseFirestore.instance;
+    final id = const Uuid().v4();
+    final ref = firestore.collection("records/$id/participants");
+    await firestore.doc("records/$id").set(roomData.toMap());
+    for (var student in students) {
+      await ref.add(student.toMap());
+    }
+    await firestore.doc('rooms/${roomData.roomId}').set(
+      {
+        'isActive': false,
+      },
+    );
+    await firestore.doc('rooms/${roomData.roomId}').delete();
   }
 }

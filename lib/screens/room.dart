@@ -19,6 +19,7 @@ class RoomView extends StatefulWidget {
 class _RoomViewState extends State<RoomView> {
   late RoomModel roomData;
   late List<StudentModel> students;
+  bool expanded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,21 +55,38 @@ class _RoomViewState extends State<RoomView> {
           }
           return Column(
             children: [
-              ListTile(
-                title: const Text('Mentor name :'),
-                subtitle: Text(roomData.mentorName),
-              ),
-              ListTile(
-                title: const Text('Subject :'),
-                subtitle: Text(roomData.subject),
-              ),
-              ListTile(
-                title: const Text('Room Code:'),
-                subtitle: Text(roomData.roomId),
-              ),
-              ListTile(
-                title: const Text('Total students:'),
-                subtitle: Text("${students.length}"),
+              ExpansionPanelList(
+                expansionCallback: (panelIndex, isExpanded) {
+                  setState(() => expanded = !expanded);
+                },
+                elevation: 0,
+                children: [
+                  ExpansionPanel(
+                    isExpanded: expanded,
+                    headerBuilder: (context, isExpanded) {
+                      return ListTile(
+                        title: const Text('Room Code:'),
+                        subtitle: Text(roomData.roomId),
+                      );
+                    },
+                    body: Column(
+                      children: [
+                        ListTile(
+                          title: const Text('Mentor name :'),
+                          subtitle: Text(roomData.mentorName),
+                        ),
+                        ListTile(
+                          title: const Text('Subject :'),
+                          subtitle: Text(roomData.subject),
+                        ),
+                        ListTile(
+                          title: const Text('Total students:'),
+                          subtitle: Text("${students.length}"),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
               const Text(
                 'List of students ',
@@ -102,6 +120,18 @@ class _RoomViewState extends State<RoomView> {
                       ),
                     );
                   },
+                ),
+              ),
+              ListTile(
+                title: const Text('Capture Attendance :'),
+                trailing: IconButton(
+                  onPressed: () async {
+                    await RoomController().captureAttendance(
+                      roomData,
+                      students,
+                    );
+                  },
+                  icon: const Icon(Icons.download),
                 ),
               ),
             ],
