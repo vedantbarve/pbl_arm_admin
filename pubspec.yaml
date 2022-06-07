@@ -22,8 +22,9 @@ dependencies:
   geolocator: ^8.2.0
   shared_preferences: ^2.0.13
   get_ip_address: ^0.0.5
-  url_strategy: ^0.2.0
   multiple_stream_builder: ^1.0.0
+  dart_date: ^1.1.1
+  excel: ^1.1.5
 
 dev_dependencies:
   flutter_test:
