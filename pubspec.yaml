@@ -24,7 +24,7 @@ dependencies:
   get_ip_address: ^0.0.5
   multiple_stream_builder: ^1.0.0
   dart_date: ^1.1.1
-  excel: ^1.1.5
+  excel: 
 
 dev_dependencies:
   flutter_test:
