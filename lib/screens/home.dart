@@ -263,6 +263,8 @@ class _HomeViewState extends State<HomeView> {
                             roomLat: userLocation!['latitude'],
                             roomLong: userLocation['longitude'],
                             subject: _subject.text,
+                            division: "FE $divisionDropDownValue",
+                            batch: "$batchDropDownValue",
                             roomLimit: 75,
                             isActive: true,
                           ),

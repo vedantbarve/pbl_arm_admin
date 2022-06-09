@@ -8,6 +8,8 @@ class RoomModel {
   dynamic roomLong;
   dynamic roomLimit;
   dynamic subject;
+  dynamic division;
+  dynamic batch;
   dynamic isActive;
 
   RoomModel({
@@ -18,6 +20,8 @@ class RoomModel {
     required this.roomLong,
     this.roomLimit,
     this.subject,
+    required this.division,
+    required this.batch,
     this.isActive,
   });
 
@@ -29,21 +33,25 @@ class RoomModel {
       'roomLat': roomLat,
       'roomLong': roomLong,
       'roomLimit': roomLimit,
-      'isActive': isActive,
       'subject': subject,
+      'division': division,
+      'batch': batch,
+      'isActive': isActive,
     };
   }
 
   factory RoomModel.fromMap(Map<String, dynamic> map) {
     return RoomModel(
-      roomId: map['roomId'],
-      mentorName: map['mentorName'],
-      mentorId: map['mentorId'],
-      roomLat: map['roomLat'],
-      roomLong: map['roomLong'],
-      roomLimit: map['roomLimit'],
-      isActive: map['isActive'] as bool,
-      subject: map['subject'],
+      roomId: map['roomId'] ?? null,
+      mentorName: map['mentorName'] ?? null,
+      mentorId: map['mentorId'] ?? null,
+      roomLat: map['roomLat'] ?? null,
+      roomLong: map['roomLong'] ?? null,
+      roomLimit: map['roomLimit'] ?? null,
+      subject: map['subject'] ?? null,
+      division: map['division'] ?? null,
+      batch: map['batch'] ?? null,
+      isActive: map['isActive'] ?? null,
     );
   }
 
