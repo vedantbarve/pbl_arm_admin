@@ -25,6 +25,7 @@ dependencies:
   multiple_stream_builder: ^1.0.0
   dart_date: ^1.1.1
   excel: 
+  firebase_auth: ^3.3.19
 
 dev_dependencies:
   flutter_test:
