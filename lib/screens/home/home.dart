@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pbl_arm_admin/models/room_model.dart';
+import 'package:pbl_arm_admin/screens/home/widgets.dart';
 import 'package:pbl_arm_admin/services/device/location_controller.dart';
 import 'package:pbl_arm_admin/services/firebase/room_controller.dart';
 import 'package:uuid/uuid.dart';
@@ -19,13 +21,15 @@ class _HomeViewState extends State<HomeView> {
   final _dateAndTime = TextEditingController();
   final _subject = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final timeStamp = DateTime.now();
   int divisionDropDownValue = 1;
-  int batchDropDownValue = 1;
+  int batchDropDownValue = 0;
+
   @override
   void initState() {
     super.initState();
     GetLocation().requestLocationPermission();
-    _dateAndTime.text = DateTime.now().toHumanString();
+    _dateAndTime.text = timeStamp.toHumanString();
     _roomCode.text = const Uuid().v4().substring(0, 5);
   }
 
@@ -37,14 +41,9 @@ class _HomeViewState extends State<HomeView> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
+        drawer: const HomeDrawer(),
         appBar: AppBar(
-          title: const Text(
-            "PICT ATTENDANCE ADMIN",
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          title: const Text("PBL-ARM ADMIN"),
         ),
         body: Form(
           key: _formKey,
@@ -197,7 +196,9 @@ class _HomeViewState extends State<HomeView> {
                           child: Text(
                             'Division',
                             style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         DropdownButton<int>(
@@ -233,7 +234,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         DropdownButton<int>(
                           value: batchDropDownValue,
-                          items: <int>[1, 2, 3]
+                          items: <int>[0, 1, 2, 3]
                               .map<DropdownMenuItem<int>>((int value) {
                             return DropdownMenuItem<int>(
                               value: value,
@@ -259,7 +260,7 @@ class _HomeViewState extends State<HomeView> {
                           RoomModel(
                             roomId: _roomCode.text,
                             mentorName: _mentorName.text,
-                            mentorId: '',
+                            mentorId: FirebaseAuth.instance.currentUser!.uid,
                             roomLat: userLocation!['latitude'],
                             roomLong: userLocation['longitude'],
                             subject: _subject.text,
@@ -267,6 +268,7 @@ class _HomeViewState extends State<HomeView> {
                             batch: "$batchDropDownValue",
                             roomLimit: 75,
                             isActive: true,
+                            timeStamp: timeStamp.toIso8601String(),
                           ),
                         )
                             .then(

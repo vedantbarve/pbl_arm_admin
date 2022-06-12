@@ -4,9 +4,9 @@ import 'package:beamer/beamer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:multiple_stream_builder/multiple_stream_builder.dart';
-import '../models/room_model.dart';
-import '../models/student_model.dart';
-import '../services/firebase/room_controller.dart';
+import '../../models/room_model.dart';
+import '../../models/student_model.dart';
+import '../../services/firebase/room_controller.dart';
 
 class RoomView extends StatefulWidget {
   final String roomId;
@@ -20,6 +20,19 @@ class _RoomViewState extends State<RoomView> {
   late RoomModel roomData;
   late List<StudentModel> students;
   bool expanded = false;
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    RoomController().captureAttendance(roomData, students);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    RoomController().captureAttendance(roomData, students);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -34,7 +34,10 @@ class _AuthViewState extends State<AuthView> {
                 ),
                 child: Text(
                   'SignIn',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(

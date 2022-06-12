@@ -102,6 +102,6 @@ class RoomController {
         'isActive': false,
       },
     );
-    await firestore.doc('rooms/${roomData.roomId}').delete();
+    // await firestore.doc('rooms/${roomData.roomId}').delete();
   }
 }

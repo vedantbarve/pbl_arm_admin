@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class RoomModel {
-  dynamic roomId;
+class RecordModel {
+  dynamic recordId;
   dynamic mentorName;
   dynamic mentorId;
   dynamic roomLat;
@@ -12,24 +12,23 @@ class RoomModel {
   dynamic batch;
   dynamic isActive;
   dynamic timeStamp;
-
-  RoomModel({
-    required this.roomId,
+  RecordModel({
+    required this.recordId,
     required this.mentorName,
     required this.mentorId,
     required this.roomLat,
     required this.roomLong,
-    this.roomLimit,
-    this.subject,
+    required this.roomLimit,
+    required this.subject,
     required this.division,
     required this.batch,
-    this.isActive,
+    required this.isActive,
     required this.timeStamp,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'roomId': roomId,
+      'recordId': recordId,
       'mentorName': mentorName,
       'mentorId': mentorId,
       'roomLat': roomLat,
@@ -43,9 +42,9 @@ class RoomModel {
     };
   }
 
-  factory RoomModel.fromMap(Map<String, dynamic> map) {
-    return RoomModel(
-      roomId: map['roomId'],
+  factory RecordModel.fromMap(Map<String, dynamic> map) {
+    return RecordModel(
+      recordId: map['recordId'],
       mentorName: map['mentorName'],
       mentorId: map['mentorId'],
       roomLat: map['roomLat'],
@@ -61,6 +60,6 @@ class RoomModel {
 
   String toJson() => json.encode(toMap());
 
-  factory RoomModel.fromJson(String source) =>
-      RoomModel.fromMap(json.decode(source));
+  factory RecordModel.fromJson(String source) =>
+      RecordModel.fromMap(json.decode(source));
 }
