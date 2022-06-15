@@ -5,7 +5,7 @@ import '../../models/room_model.dart';
 import '../../models/student_model.dart';
 
 class RoomController {
-  Future createRoom(RoomModel room) async {
+  Future<void> createRoom(RoomModel room) async {
     try {
       final firestore = FirebaseFirestore.instance;
       await firestore.doc('rooms/${room.roomId}').set(room.toMap());
@@ -52,6 +52,7 @@ class RoomController {
         {
           "name": name,
           "rollNo": rollNo,
+          "ipAddress": ipAddress,
         },
       );
     } catch (err) {
@@ -102,6 +103,6 @@ class RoomController {
         'isActive': false,
       },
     );
-    // await firestore.doc('rooms/${roomData.roomId}').delete();
+    await firestore.doc('rooms/${roomData.roomId}').delete();
   }
 }

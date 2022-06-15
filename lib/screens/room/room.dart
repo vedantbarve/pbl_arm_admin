@@ -4,6 +4,7 @@ import 'package:beamer/beamer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:multiple_stream_builder/multiple_stream_builder.dart';
+import 'package:pbl_arm_admin/screens/room/widgets.dart';
 import '../../models/room_model.dart';
 import '../../models/student_model.dart';
 import '../../services/firebase/room_controller.dart';
@@ -37,6 +38,17 @@ class _RoomViewState extends State<RoomView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AddStudent(roomId: widget.roomId);
+            },
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
       body: StreamBuilder2(
         streams: Tuple2(
           RoomController().getRoomDataAsStream(widget.roomId),

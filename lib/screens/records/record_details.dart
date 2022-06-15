@@ -1,6 +1,7 @@
 import 'package:dart_date/dart_date.dart';
 import 'package:flutter/material.dart';
 import 'package:pbl_arm_admin/models/record_model.dart';
+import 'package:pbl_arm_admin/services/device/sheets_controller.dart';
 import 'package:pbl_arm_admin/services/firebase/records_controller.dart';
 
 import '../../models/student_model.dart';
@@ -17,15 +18,40 @@ class RecordDetailsView extends StatefulWidget {
 
 class _RecordDetailsViewState extends State<RecordDetailsView> {
   bool expanded = false;
+  final _sheet = SheetsController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: FutureBuilder(
-        future: RecordsController().getStudents(widget.recordModel.recordId),
-        builder: (context, AsyncSnapshot<List<StudentModel>> snapshot) {
-          if (snapshot.hasData) {
-            return Column(
+    return FutureBuilder(
+      future: RecordsController().getStudents(widget.recordModel.recordId),
+      builder: (context, AsyncSnapshot<List<StudentModel>> snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.grey[200],
+              onPressed: () async {
+                try {
+                  await _sheet
+                      .createAttendance(widget.recordModel, snapshot.data!)
+                      .then(
+                    (value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Spreadsheet downloaded successfully'),
+                        ),
+                      );
+                    },
+                  );
+                } catch (err) {
+                  debugPrint(err.toString());
+                }
+              },
+              child: Image.asset(
+                'assets/images/excel_icon.png',
+                height: 30,
+              ),
+            ),
+            body: Column(
               children: [
                 ExpansionPanelList(
                   expansionCallback: (panelIndex, isExpanded) {
@@ -89,18 +115,11 @@ class _RecordDetailsViewState extends State<RecordDetailsView> {
                   ),
                 ),
               ],
-            );
-          }
-          return Container();
-        },
-      ),
-      bottomNavigationBar: ListTile(
-        title: const Text('Download attendance'),
-        trailing: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.download),
-        ),
-      ),
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 }

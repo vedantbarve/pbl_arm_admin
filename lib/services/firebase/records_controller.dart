@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pbl_arm_admin/models/record_model.dart';
-import 'package:pbl_arm_admin/models/room_model.dart';
 import 'package:pbl_arm_admin/models/student_model.dart';
 
 class RecordsController {

@@ -2,7 +2,6 @@ import 'package:beamer/beamer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pbl_arm_admin/models/record_model.dart';
-import 'package:pbl_arm_admin/models/room_model.dart';
 import 'package:pbl_arm_admin/screens/authentication/authentication.dart';
 import 'package:pbl_arm_admin/screens/landing.dart';
 import 'package:pbl_arm_admin/screens/records/record_details.dart';
